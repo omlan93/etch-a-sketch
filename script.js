@@ -1,4 +1,10 @@
-const numberOfSquares = 10;
+const input = document.querySelector(".input-box")
+
+console.log(input.value);
+const btnClear = document.querySelector(".btn-clear")
+
+
+let numberOfSquares = 23;
 
 const squareBox = document.querySelector(".square-box")
 const squareBoxStyle = window.getComputedStyle(squareBox)
@@ -21,8 +27,6 @@ squareBox.style.width = `${squareBoxHeightInt}` + 'px';
 
 console.log(squareBox.style.height);
 
-const squareWidth = squareBoxHeightInt / numberOfSquares;
-const squareHeight = squareWidth;
 console.log(squareBox);
 // while (squareBoxStyle.height) {
 
@@ -37,28 +41,45 @@ const randomColor = function (e) {
 
 }
 
+const gridCreate = function (e) {
+    console.log(e.code);
+    if (e.code === "Enter") {
+        console.log("YES");
+        console.log(input.value);
+        numberOfSquares = input.value;
+        console.log(numberOfSquares);
 
+        const squareWidth = squareBoxHeightInt / numberOfSquares;
+        const squareHeight = squareWidth;
+        for (let i = 0; i < numberOfSquares ** 2; i++) {
+            const square = document.createElement("div")
+            square.classList.add("squares")
+            square.style.height = `${squareWidth}` + 'px';
+            square.style.width = `${squareWidth}` + 'px';
+            square.style.backgroundColor = "white";
+            square.style.border = "0.5px solid pink";
+            square.style.backgroundColor = `rgb(${arr[0]},${arr[1]},${arr[2]})`
+            squareBox.appendChild(square);
+            square.addEventListener('mouseover', randomColor)
 
-for (let i = 0; i < numberOfSquares ** 2; i++) {
-    const square = document.createElement("div")
-    square.classList.add("squares")
-    square.style.height = `${squareWidth}` + 'px';
-    square.style.width = `${squareWidth}` + 'px';
-    square.style.backgroundColor = "white";
-    square.style.border = "0.5px solid pink";
-    square.style.backgroundColor = `rgb(${arr[0]},${arr[1]},${arr[2]})`
-    squareBox.appendChild(square);
-    square.addEventListener('mouseover', randomColor)
-
+        }
+    }
 }
 
-
-
-
-
-
+input.addEventListener('keydown', gridCreate)
 
 const squareBoxHeight = squareBoxStyle.height
 console.log(`rgb(${arr[0]},${arr[1]},${arr[2]})`);
 
+const clearGrid = function () {
+    console.log("hello");
+    const squares = document.querySelectorAll(".squares")
+    squares.forEach((sqr) => { squareBox.removeChild(sqr) })
+    arr[0] = 255;
+    arr[1] = 255;
+    arr[2] = 255;
+
+}
+
+btnClear.addEventListener('click', clearGrid)
 
